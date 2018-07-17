@@ -3,6 +3,10 @@
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
 
     </style>
+
+    <style name="img_basic">
+        <item name="android:background">#000</item>
+    </style>
     <style name="main_event_height">
         <item name="android:layout_height">25dp</item>
     </style>
