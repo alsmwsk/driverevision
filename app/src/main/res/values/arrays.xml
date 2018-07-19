@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="enterprise">
+        <item>수도권(서울,인천,경기)</item>
+        <item>대구 업체선정중입니다</item>
+        <item>대전(대전,세종,연기)(</item>
+        <item>광주</item>
+        <item>울산</item>
+        <item>부산</item>
+        <item>강원중부(원주,횡성,제천)</item>
+        <item>강원서부(춘천,화전,가평,홍천)</item>
+    </string-array>
+</resources>

@@ -17,16 +17,38 @@
     </LinearLayout>
 
     <RelativeLayout android:id="@+id/tabbar_title" android:background="@drawable/bg_steptitle" android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginBottom="10dp" android:layout_below="@+id/tabbar">
-        <TextView android:id="@+id/tabbar_titletext" android:layout_width="match_parent" android:layout_height="match_parent" android:text="@string/text_infotitle1" style="@style/text17sp_center"/>
+
+        <TextView android:id="@+id/tabbar_titletext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/text_infotitle1"
+            style="@style/text17sp_center"
+            />
+
+        <TextView android:id="@+id/tabbar_titletext2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/text_infotitle2"
+            style="@style/text17sp_center"
+            android:visibility="gone"/>
+
+
 
         <TextView
+            android:id="@+id/tabbar_titletext3"
             style="@style/text17sp_center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:text="@string/text_infotitle3" />
+            android:text="@string/text_infotitle3"
+            android:visibility="gone"/>
     </RelativeLayout>
-    <ViewFlipper android:id="@+id/stepflipper" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_below="@+id/tabbar_title"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/steppager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tabbar_title"/>
 </RelativeLayout>

@@ -2,10 +2,12 @@ package com.example.seowoo.driverevision;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -38,6 +40,7 @@ public class LifeBookMarkMain extends AppCompatActivity {
     private String today = "";
     private String result = "";
     private static boolean network;
+    private AlertDialog alertDialog;
 
 
     //메인쓰레드는 ui를 못건드리고 별도의 쓰레드를 이용한다?
@@ -56,11 +59,12 @@ public class LifeBookMarkMain extends AppCompatActivity {
 
             //"http://alsmwsk3.dothome.co.kr/Android/ScheduleList.php?uuid="
             try{
-                targert = "http://192.168.219.101:8181/test/androidDB.jsp?phone=" + URLEncoder.encode(phone,"UTF-8");
+                targert = "http://192.168.219.110:8181/test/androidDB.jsp?phone=" + URLEncoder.encode(phone,"UTF-8");
                 dialog.setMessage("로딩중");
-                dialog.setCancelable(false);
+                dialog.setCancelable(true);
                 dialog.show();
-                //wait(3000);
+
+
             }catch (Exception e)
             {
                 e.printStackTrace();
@@ -101,8 +105,8 @@ public class LifeBookMarkMain extends AppCompatActivity {
                     return stringBuilder.toString().trim();
                 } else {
                     // 통신 실패
-                    dialog.dismiss();
-                    Toast.makeText(LifeBookMarkMain.this, "통신 실패", Toast.LENGTH_SHORT).show();
+//                    dialog.dismiss();
+//                    Toast.makeText(LifeBookMarkMain.this, "통신 실패", Toast.LENGTH_SHORT).show();
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -130,14 +134,39 @@ public class LifeBookMarkMain extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(result);
                 String string = jsonObject.getString("result");
 
+
+
                 //result = jsonObject.getString("result");
                 //Log.d(TAG, "onPostExecute: result" + string);
 
 
                 dialog.dismiss();
                 network = true;
-                Toast.makeText(LifeBookMarkMain.this, string, Toast.LENGTH_SHORT)
-                        .show();
+
+                if (string.equals("success"))
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(LifeBookMarkMain.this);
+                    alertDialog = builder.setMessage("성공")
+                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(LifeBookMarkMain.this, SettingActivity.class);
+                                    startActivity(intent);
+                                }
+                            })
+                            .create();
+                    alertDialog.show();
+
+
+                }
+                else if (string.equals("registered")){
+
+                    Intent intent = new Intent(LifeBookMarkMain.this, MainActivity.class);
+                    startActivity(intent);
+
+                }
+
+
 
             }catch (Exception e){
                 e.printStackTrace();;
@@ -152,7 +181,7 @@ public class LifeBookMarkMain extends AppCompatActivity {
         TelephonyManager mgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
 //        return mgr.getLine1Number();
-        return "010-1234-5678";
+        return "010-3456-5678";
 
     }
 
@@ -167,7 +196,7 @@ public class LifeBookMarkMain extends AppCompatActivity {
 
     public void gosetting(boolean network){
         if (network){
-            Intent intent = new Intent(this, SettingActivity);
+            Intent intent = new Intent(this, SettingActivity.class);
         }
     }
 }
